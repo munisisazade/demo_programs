@@ -69,7 +69,7 @@ class UserDashboard(IpRestrictedForArea, TemplateView, LoginRestrictedMixin):
     def get_context_data(self, **kwargs):
         context = super(UserDashboard, self).get_context_data(**kwargs)
         if self.request.user.usertype == 3:
-            context['branch_list'] = PandaBranch.objects.filter(other=False,status=True)
+            context['branch_list'] = PandaBranch.objects.all()
         return context
 
 
@@ -140,9 +140,6 @@ class BranchAdminDeleteView(IpRestrictedForArea, DeleteView, AllowOnlyAdministra
 class BranchListView(IpRestrictedForArea, ListView, AllowOnlyAdministrator):
     model = PandaBranch
     template_name = 'administrator/branch-list.html'
-
-    def get_queryset(self):
-        return self.model.objects.filter(other=False,status=True)
 
 
 class TeachersListView(IpRestrictedForArea, BaseBranchView, ListView, LoginAllowOnlyManagerAndAdministration):

@@ -35,18 +35,10 @@
                                     <tbody class="font-monts-r">
                                     {% for student in object_list|slice:"100" %}
                                     <tr>
-                                        {% if other_system %}
-                                        <td class="student-{{ student.id }}"><a href="{% url 'student-update' pk=student.pk %}" class="name text-none {% if student.testiq %}green{% endif %}">{{ student.full_name }}</a></td>
-                                        {% else %}
                                         <td class="student-{{ student.id }}">{% if student.testiq %}<img src="{% static 'img/panda.png' %}" class="img-responsive">{% endif %}<a href="{% url 'student-update' pk=student.pk %}" class="name text-none {% if student.testiq %}green{% endif %}">{{ student.full_name }}</a></td>
-                                        {% endif %}
                                         <td>{{ student.start|date:"d/F/Y" }}</td>
                                         <td>{{ student.plan }}</td>
-                                        {% if other_system %}
-                                         <td class="button-{{ student.id }}"><button class="btn btn-success {% if student.testiq %}{% else %}btnConfirms{% endif %}"  data-toggle="modal" data-id="{{ student.id }}" {% if student.testiq %}disabled="disabled"{% endif %} data-target="#PaymentModal">{% if student.testiq %}Təstiqləndi{% else %}Təstiqlə{% endif %}</button></td>
-                                        {% else %}
-                                         <td class="button-{{ student.id }}"><button class="btn btn-success {% if student.testiq %}{% else %}btnConfirm{% endif %}"  data-toggle="modal" data-id="{{ student.id }}" {% if student.testiq %}disabled="disabled"{% endif %} data-target="#PaymentModal">{% if student.testiq %}Təstiqləndi{% else %}Təstiqlə{% endif %}</button></td>
-                                        {% endif %}
+                                        <td class="button-{{ student.id }}"><button class="btn btn-success {% if student.testiq %}{% else %}btnConfirm{% endif %}"  data-toggle="modal" data-id="{{ student.id }}" {% if student.testiq %}disabled="disabled"{% endif %} data-target="#PaymentModal">{% if student.testiq %}Təstiqləndi{% else %}Təstiqlə{% endif %}</button></td>
                                     </tr>
                                     {% endfor %}
                                     <!--<tr>

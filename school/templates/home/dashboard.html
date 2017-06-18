@@ -2,52 +2,6 @@
 {% load school_app %}
 {% load static %}
 {% block header %}
-    {% if other_system %}
-        <style>
-            .section-profile .profile-left .title {
-                background:{% if admin_color %}linear-gradient(to bottom, #000000,{{ admin_color }}){% else %}linear-gradient(to bottom, #000000,#00c02d){% endif %} !important;
-            }
-            .section-profile .profile-left {
-                background:{% if admin_color %}linear-gradient(to bottom, #000000,{{ admin_color }}){% else %}linear-gradient(to bottom, #000000,#00c02d){% endif %} !important;
-            }
-            .bg-blue {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .nav-profile-list>li a:hover, .nav-profile-list>li a:active, .nav-profile-list>li a:focus {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .nav-profile>li>ul>li a:hover {
-                color:#fff !important;
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .nav-profile>li>ul>li a {
-                color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .btn-blue {
-                color: #fff;
-                background-color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-                border-color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .table-payment thead tr {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .table-jurnal thead tr {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .btn-success {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .green {
-                color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .modal-add-payment .modal-header {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-            .modal-payment .modal-content {
-                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
-            }
-        </style>
-    {% endif %}
 {% endblock %}
 {% block content %}
     {% if allow %}
@@ -59,11 +13,7 @@
                         <div class="profile-left-block">
                             <h3 class="title text-center nm font-monts-r">
                                 <a href="{% url 'dashboard' %}">
-                                    {% if other_system %}
-                                    <img src="{{ admin_logo|get_image_path }}" class="img-responsive center-block">
-                                    {% else %}
                                     <img src="{% static 'img/logo.png' %}" class="img-responsive center-block">
-                                    {% endif %}
                                 </a>
                             </h3>
                             <div class="media media-profile font-monts-r">
@@ -156,12 +106,9 @@
                                         <li>
                                             <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
                                         </li>
-                                        {% if other_system %}
-                                        {% else %}
                                         <li>
                                             <a href="{% url 'security' %}">Sistemə qoşulu cihazlar</a>
                                         </li>
-                                        {% endif %}
                                     {% endif %}
                                 {% comment %}<li>
                                     <a href="{% url 'student-list' %}">Qeydiyyat cədvəli </a>

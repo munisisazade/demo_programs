@@ -25,12 +25,6 @@ class IpRestrictedForArea(View):
             new_user.save()
         try:
             context['userstatus'] = self.request.user.usertype
-            if self.request.user.branch.other == True:
-                context['other_system'] = True
-                context['admin_color'] = self.request.user.branch.admin_color
-                context['admin_logo'] = self.request.user.branch.admin_logo
-            else:
-                pass
         except:
             pass
         return context

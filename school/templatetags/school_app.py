@@ -59,10 +59,6 @@ def is_none(arg):
 
 
 @register.filter
-def get_image_path(arg):
-    return '/media/' + str(arg)
-
-@register.filter
 def convert_int(arg):
     return int(arg)
 

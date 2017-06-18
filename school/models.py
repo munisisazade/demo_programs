@@ -4,8 +4,7 @@ from django.conf import settings
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
-from school.options.tools import slugify, GENDER, POSITION, USERTYPES, PAYMENT_STATUS, ATTENDANCE, \
-    CHOOSE_COLOR, get_admin_panel_logos
+from school.options.tools import slugify, GENDER, POSITION, USERTYPES, PAYMENT_STATUS, ATTENDANCE
 from datetime import datetime as d
 import calendar
 from django.db.models import Q
@@ -444,17 +443,8 @@ class Attendense(models.Model):
 class PandaBranch(models.Model):
     name = models.CharField(max_length=255,verbose_name="Filialın adı")
     slug = models.SlugField(verbose_name="Slug", blank=True, null=True)
-    other = models.BooleanField(default=False, verbose_name="Tamamilə yeni bir sistemdir")
     status = models.BooleanField(default=True,verbose_name="Sistemdə görünməyi")
-    admin_color = models.CharField(max_length=25,null=True, blank=True, verbose_name="Rəngin kodu")
-    admin_logo = models.ImageField(upload_to=get_admin_panel_logos, null=True,blank=True, verbose_name="Admin panelin Logosu")
-    date = models.DateTimeField(auto_now_add=True, verbose_name="Yaradıldığı tarix")
-
-    def color_picker(self):
-        return CHOOSE_COLOR
-
-    color_picker.short_description = "Admin panelin rəngini seçin"
-    color_picker.allow_tags = True
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('-id',)

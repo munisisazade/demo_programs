@@ -43,11 +43,7 @@
 
                                     {% for payment in object_list %}
                                     <tr>
-                                        {% if other_system %}
-                                        <td><a href="{% url 'student-update' pk=payment.people.pk %}" class="name text-none">{{ payment.people.full_name }}</a></td>
-                                        {% else %}
                                         <td><img src="{% static 'img/panda.png' %}" class="img-responsive"><a href="{% url 'student-update' pk=payment.people.pk %}" class="name text-none">{{ payment.people.full_name }}</a></td>
-                                        {% endif %}
                                         <td>{{ payment.people.money|is_none }}</td>
                                         <td>{{ payment.date|date:"d/F/Y" }}</td>
                                         <td>{{ payment.people.plan }}</td>

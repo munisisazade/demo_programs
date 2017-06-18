@@ -6,21 +6,15 @@ from datetime import date
 def get_user_profile_photo_file_name(instance, filename):
     return "profile/%s_%s" % (str(time()).replace('.', '_'), filename)
 
-
 def get_slider_photo_file_name(instance, filename):
     return "slider/%s_%s" % (str(time()).replace('.', '_'), filename)
-
 
 def get_news_photo_file_name(instance, filename):
     return "news/%s_%s" % (str(time()).replace('.', '_'), filename)
 
-
 def get_about_us_photo_file_name(instance, filename):
     return "about-us/%s_%s" % (str(time()).replace('.', '_'), filename)
 
-
-def get_admin_panel_logos(instance, filename):
-    return "company/logo/%s_%s" % (str(time()).replace('.', '_'), filename)
 
 def attendance_status(arg):
     if arg == '+':
@@ -63,11 +57,9 @@ def get_last_day_of_month():
     result = calendar.monthrange(year, month)[1]
     return result
 
-
 VALID_IMAGE_FILETYPES = (
-    '.jpg', '.png', '.tiff'
+    '.jpg','.png','.tiff'
 )
-
 
 def parser(arr):
     student_ids = list(set([x[2] for x in arr]))
@@ -76,53 +68,47 @@ def parser(arr):
         new = {}
         for x in arr:
             if y == x[2]:
-                if new.get('.foo' + str(x[2]), False):
-                    new['.foo-' + str(x[2])] += [x]
+                if new.get('.foo'+str(x[2]),False):
+                    new['.foo-'+str(x[2])] += [x]
                 else:
-                    new['.foo-' + str(x[2])] = [x]
+                    new['.foo-'+str(x[2])] = [x]
         last_arr.append(new)
     return last_arr
 
 
 GENDER = (
-    (1, "Kişi"),
-    (2, "Qadın")
+    (1,"Kişi"),
+    (2,"Qadın")
 )
 POSITION = (
-    (1, "Fənn Müəllimi"),
-    (2, "Ibtidai sinif Müəllimi")
+    (1,"Fənn Müəllimi"),
+    (2,"Ibtidai sinif Müəllimi")
 )
 
 USERTYPES = (
-    (1, "Müəllim"),
-    (2, "Menecer"),
-    (3, "Administrator")
+    (1,"Müəllim"),
+    (2,"Menecer"),
+    (3,"Administrator")
 )
 
 PAYMENT_STATUS = (
-    (1, "Gecikir"),
-    (2, "Normal"),
-    (3, "Vaxtinda")
+    (1,"Gecikir"),
+    (2,"Normal"),
+    (3,"Vaxtinda")
 )
 
 ATTENDANCE = (
-    (1, "plus"),
-    (2, "minus"),
-    (3, "icazəli"),
-    (4, "çıxıb"),
+    (1,"plus"),
+    (2,"minus"),
+    (3,"icazəli"),
+    (4,"çıxıb"),
 )
 
-CHOOSE_COLOR = "<input type='color' onchange='choose_color(this)'\/>" \
-               "<script>" \
-               "function choose_color(element){" \
-               "document.getElementById('id_admin_color').value=element.value;" \
-               "}" \
-               "</script>"
+
 """
    50  --  12
    40  --  x
    x = (12 * 40) / 50
 """
 
-months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr',
-          'Dekabr']
+months = ['Yanvar','Fevral','Mart','Aprel','May','İyun','İyul','Avqust','Sentyabr','Oktyabr','Noyabr','Dekabr']
