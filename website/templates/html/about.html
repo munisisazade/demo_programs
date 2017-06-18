@@ -1,0 +1,25 @@
+{% extends 'html/new_index.html' %}
+{% load static %}
+{% block content %}
+<section class="section-menu-title">
+    <div class="container">
+        <h1 class="title text-center font-roboto-bl">{{ title.name }}</h1>
+    </div>
+</section>
+<section class="section-menu-desc">
+    <div class="container">
+        {% for news in about %}
+        <div class="menu-desc-block center-block">
+            <div class="media media-about">
+                <div class="media-left">
+                    <img src="/media/{{ news.picture }}" class="media-object">
+                </div>
+                <div class="media-body font-roboto-r">
+                    {{ news.content|safe }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

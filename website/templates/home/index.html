@@ -1,0 +1,266 @@
+{% extends 'base/public_index.html' %}
+{% load website_tool %}
+{% load static %}
+{% block content %}
+<section id="body" class="section-slider hidden-xs">
+    <div class="container-fluid np">
+        <div class="owlSlider owl-carousel relative">
+                {% if sliders %}
+                    {% for slide in sliders %}
+                        <div class="item">
+                            <img src="/media/{{ slide.photo }}" class="img-responsive">
+                            <div class="item-text-block">
+                                <h2 class="title font-roboto-bl">{{ slide.title }}</h2>
+                                <p class="desc font-roboto-r">
+                                    {{ slide.content }}
+                                </p>
+                                {% if slide.button %}
+                                    <a href="{{ slide.link }}" class="btn btn-yellow font-roboto-m">Daha Ətraflı</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                  {% endif %}
+        </div>
+    </div>
+</section>
+<section id="about" class="section-about sectionAnimate">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="#" class="video center-block animated opacity" data-toggle="modal" data-direction="zoomIn" data-target="#AboutModal">
+                    <img src="{{ about_us.video|get_youtube_video_image }}" class="img-responsive">
+                    <i class="fa fa-play-circle-o"></i>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="about-block">
+                    <h2 class="title font-roboto-bl animated opacity" data-direction="fadeInUp">
+                        <span class="text-blue">{{ about_us.title }}</span>
+                    </h2>
+                    <p class="desc font-roboto-r animated opacity" data-direction="fadeInUp">
+                        {{ about_us.content|safe|slice:":342" }}...
+                    </p>
+                    <a href="{% url 'about-us' %}" class="btn btn-trns-blue font-roboto-b animated opacity" data-direction="fadeInUp">Daha Ətraflı</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="programs" class="section-programs sectionAnimate">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl animated opacity" data-direction="fadeInUp">{{ program_head.title }}</h4>
+        <p class="desc text-center font-roboto-r animated opacity" data-direction="fadeInUp">
+            {{ program_head.content }}
+        </p>
+        <div class="row">
+                {% for news in program_list %}
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project programs animated opacity" data-direction="fadeInLeft">
+                        <a class="center-block text-none" href="#">
+                            <img src="/media/{{ news.cover_picture }}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> {{ news.date|date:'F j, Y' }}</time></p>
+                                <h4 class="title font-roboto-bl">{{ news.title }}</h4>
+                                 {{ news.content|safe|slice:":151" }}...
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+        </div>
+        <div class="button-block text-center">
+            {% if program_list|length > 3 %}
+            <a href="all.html" class="btn btn-white yellow font-roboto-b">View All Programs</a>
+            {% endif %}
+
+            </div>
+    </div>
+</section>
+<section id="events" class="section-events sectionAnimate">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl animated opacity" data-direction="fadeInUp">Tədbirlər</h4>
+        <p class="desc text-center font-roboto-r animated opacity" data-direction="fadeInUp">
+        </p>
+        <div class="row">
+                {% for event in event_list %}
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project events animated opacity" data-direction="fadeInLeft">
+                        <a class="center-block text-none" href="#">
+                            <img src="/media/{{ event.cover_picture }}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> {{ event.date|date:'F j, Y' }}</time></p>
+                                <h4 class="title font-roboto-bl">{{ event.title }}</h4>
+                                {{ news.content|safe|slice:":151" }}...
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+        <div class="button-block text-center">
+             {% if event_list|length > 3 %}
+                <a href="all.html" class="btn btn-white blue font-roboto-b">Bütün tədbirlərə bax</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section id="news" class="section-news sectionAnimate">
+    <div class="container">
+        <h4 class="title font-roboto-bl text-center animated opacity" data-direction="fadeInUp">
+            Xəbərlər
+        </h4>
+        <div class="row">
+                {% for news in news_list %}
+                    <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project programs animated opacity" data-direction="fadeInLeft">
+                        <a class="center-block text-none" href="#">
+                            <img src="/media/{{ news.cover_picture }}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> {{ news.date|date:'F j, Y' }}</time></p>
+                                <h4 class="title font-roboto-bl">{{ news.title }}</h4>
+                                 {{ news.content|safe|slice:":151" }}...
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+        </div>
+        <div class="button-block text-center">
+            {% if news_list|length > 3 %}
+                <a href="all.html" class="btn btn-white blue font-roboto-b">Bütün xəbərlərə bax</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section id="multimedia" class="section-multimedia sectionAnimate">
+    <div class="container">
+        <h4 class="title font-roboto-bl text-center animated opacity" data-direction="fadeInUp">
+            Multimedia
+        </h4>
+        <div class="row">
+                {% for news in multimedia_list %}
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project events animated opacity" data-direction="fadeInLeft">
+                        <a href="#" class="video center-block" data-toggle="modal" data-target="#AboutModal">
+                            <img src="/media/{{ event.cover_picture }}">
+                            <i class="fa fa-play-circle-o"></i>
+                        </a>
+                        <div class="caption">
+                            <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> {{ event.date|date:'F j, Y' }}</time></p>
+                            <h4 class="title font-roboto-bl">{{ event.title }}</h4>
+                            {{ news.content|safe|slice:":151" }}...
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+        </div>
+        {% if multimedia_list|length > 3 %}
+            <a href="all.html" class="btn btn-white blue font-roboto-b">Bütün multimediaya bax</a>
+        {% endif %}
+    </div>
+</section>
+<section id="kolektiv" class="section-multimedia sectionAnimate">
+    <div class="container">
+        <h4 class="title font-roboto-bl text-center animated opacity" data-direction="fadeInUp">
+            Bizim komandamız
+        </h4>
+        <div class="row">
+                {% for news in collective_list %}
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project events animated opacity" data-direction="fadeInLeft">
+                        <a class="center-block text-none" href="#">
+                            <img src="/media/{{ event.cover_picture }}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> {{ event.date|date:'F j, Y' }}</time></p>
+                                <h4 class="title font-roboto-bl">{{ event.title }}</h4>
+                                {{ news.content|safe|slice:":151" }}...
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+        </div>
+        {% if collective_list|length > 3 %}
+            <a href="all.html" class="btn btn-white blue font-roboto-b">Ətraflı</a>
+        {% endif %}
+    </div>
+</section>
+<section id="contact" class="section-contact sectionAnimate">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl animated opacity" data-direction="fadeInUp">Bizimlə Əlaqə</h4>
+{#        <p class="desc text-center font-roboto-r animated opacity" data-direction="fadeInUp">#}
+{#            Our Featured Programs are selected through a rigorous process and uniquely created for each semester.#}
+{#        </p>#}
+        <div class="row">
+            <div class="col-md-7">
+                <form class="form form-contact c-white font-roboto-r animated opacity" data-direction="zoomIn">
+                    <p class="form-title text-uppercase font-roboto-l">Bizə məktub yaz</p>
+                    <p class="form-desc">Pandaschool təhsil mərkəzi</p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-project" placeholder="Adınız Soyadınız">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="email" class="form-control input-project" placeholder="email adresiniz">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-project" placeholder="subyekt">
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <textarea class="form-control textarea resize input-project" placeholder="mesajiniz"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="submit" class="btn btn-yellow btn-block text-uppercase">
+                                <span class="btn-text pull-left">Mesaj göndər</span>
+                                <i class="fa fa-chevron-right pull-right"></i>
+                            </button>
+                            <p class="email-text font-open-s-l nm">Düz email yazdığınızdan əmin olun</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <div class="contact-block animated opacity" data-direction="zoomIn">
+                    <p class="contact-title text-uppercase font-open-s-l">{{ contact_us.title }}</p>
+                    <p class="contact-desc">
+                         {{ contact_us.about }}
+                    </p>
+                    <ul class="nav nav-contact-list font-open-s-r">
+                        {% if contact_us.phone_1 %}
+                            <li><a href="tel:{{ contact_us.phone_1 }}"><i class="fa fa-mobile"></i>{{ contact_us.phone_1 }}</a></li>
+                        {% endif %}
+                        {% if contact_us.phone_2 %}
+                            <li><a href="tel:{{ contact_us.phone_2 }}"><i class="fa fa-mobile"></i>{{ contact_us.phone_2 }}</a></li>
+                        {% endif %}
+                        {% if contact_us.phone_3 %}
+                            <li><a href="tel:{{ contact_us.phone_3 }}"><i class="fa fa-mobile"></i>{{ contact_us.phone_3 }}</a></li>
+                        {% endif %}
+                        {% if contact_us.email_1 %}
+                            <li><a href="mailto:{{ contact_us.email_1 }}"><i class="fa fa-envelope-o"></i>{{ contact_us.email_1 }}</a></li>
+                        {% endif %}
+                        {% if contact_us.email_2 %}
+                            <li><a href="mailto:{{ contact_us.email_2 }}"><i class="fa fa-envelope-o"></i>{{ contact_us.email_2 }}</a></li>
+                        {% endif %}
+                        {% if contact_us.email_3 %}
+                            <li><a href="mailto:{{ contact_us.email_3 }}"><i class="fa fa-envelope-o"></i>{{ contact_us.email_3 }}</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

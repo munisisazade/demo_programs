@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="tags for website">
+    <meta name="description" content="This is the home page.">
+    <meta name="author" content="">
+    
+    <title> PandaSchool Təhsil mərkəzi - Ana səhifə </title>
+    
+    <!-- injector:css -->
+    {% load website_tool %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/design.min.css' %}">
+    <!-- endinjector -->
+    
+    <!-- injector:js -->
+    <script src="{% static 'js/min/assets/jquery.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/owl.min.js' %}"></script>
+    <script src="{% static 'js/min/app.min.js' %}"></script>
+    <!-- endinjector -->
+
+</head>
+<body data-spy="scroll" data-target="#nav-menu">
+{% block menu-nav %}
+<header class="header ">
+    <nav class="navbar navbar-project nm-b nb">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo center-block" href="{% url 'index' %}">
+                    <img src="{% static 'img/logo.png' %}" class="img-responsive">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse nb" id="bs-example-navbar-collapse-1">
+                <div id="nav-menu">
+                    <ul class="nav nav-menu index-menu navbar-nav navbar-right nm-t font-roboto-b">
+                        {% if base_menu %}
+                            {% for nav in base_menu %}
+                            <li {% if forloop.first %}class="active"{% endif %}><a href="{{ nav.link }}">{{ nav.name }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<header class="header hide">
+    <nav class="navbar navbar-project nm-b nb">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo center-block" href="{% url 'index' %}">
+                    <img src="{% static 'img/logo.png' %}" class="img-responsive">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse nb" id="bs-example-navbar-collapse-2">
+                <ul class="nav nav-menu navbar-nav navbar-right nm-t font-roboto-b">
+                    {% if base_menu %}
+                        {% for nav in base_menu %}
+                        <li {% if forloop.first %}class="active"{% endif %}><a href="{{ nav.link }}">{{ nav.name }}</a></li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+<section id="body" class="section-slider hidden-xs">
+    <div class="container-fluid np">
+        <div class="owlSlider owl-carousel relative">
+                {% if sliders %}
+                    {% for slide in sliders %}
+                        <div class="item">
+                            <img src="/media/{{ slide.photo }}" class="img-responsive">
+                            <div class="item-text-block">
+                                <h2 class="title font-roboto-bl">{{ slide.title }}</h2>
+                                <p class="desc font-roboto-r">
+                                    {{ slide.content }}
+                                </p>
+                                {% if slide.button %}
+                                    <a href="{{ slide.link }}" class="btn btn-yellow font-roboto-m">Daha Ətraflı</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                  {% endif %}
+        </div>
+    </div>
+</section>
+<section id="about" class="section-about sectionAnimate">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a href="#" class="video center-block animated opacity" data-toggle="modal" data-direction="zoomIn" data-target="#AboutModal">
+                    <img src="{{ about_us.video|get_youtube_video_image }}" class="img-responsive">
+                    <i class="fa fa-play-circle-o"></i>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="about-block">
+                    <h2 class="title font-roboto-bl animated opacity" data-direction="fadeInUp">
+                        <span class="text-blue">{{ about_us.title }}</span>
+                    </h2>
+                    <p class="desc font-roboto-r animated opacity" data-direction="fadeInUp">
+                        {{ about_us.content|safe|slice:":342" }}...
+                    </p>
+                    <a href="{% url 'about-us' %}" class="btn btn-trns-blue font-roboto-b animated opacity" data-direction="fadeInUp">Daha Ətraflı</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="programs" class="section-programs sectionAnimate">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl animated opacity" data-direction="fadeInUp">{{ program_head.title }}</h4>
+        <p class="desc text-center font-roboto-r animated opacity" data-direction="fadeInUp">
+            {{ program_head.content }}
+        </p>
+        <div class="row">
+                {% for news in program_list %}
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project programs animated opacity" data-direction="fadeInLeft">
+                        <a class="center-block text-none" href="#">
+                            <img src="/media/{{ news.cover_picture }}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> {{ news.date|date:'F j, Y' }}</time></p>
+                                <h4 class="title font-roboto-bl">{{ news.title }}</h4>
+                                 {{ news.content|safe|slice:":151" }}...
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+        </div>
+        <div class="button-block text-center">
+            {% if program_list|length > 3 %}
+            <a href="all.html" class="btn btn-white yellow font-roboto-b">View All Programs</a>
+            {% endif %}
+
+            </div>
+    </div>
+</section>
+<section id="events" class="section-events sectionAnimate">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl animated opacity" data-direction="fadeInUp">Our Events</h4>
+        <p class="desc text-center font-roboto-r animated opacity" data-direction="fadeInUp">
+            Our Featured Programs are selected through a rigorous process and uniquely created for each semester.
+        </p>
+        <div class="row">
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project events animated opacity" data-direction="fadeInLeft">
+                        <a class="center-block text-none" href="#">
+                            <img src="{% static 'content/program1.jpg' %}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                                <h4 class="title font-roboto-bl">Arts Programs</h4>
+                                <p class="desc font-roboto-r">In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project events animated opacity" data-direction="fadeInUp">
+                        <a class="center-block text-none" href="#">
+                            <img src="{% static 'content/program2.jpg' %}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                                <h4 class="title font-roboto-bl">Arts Programs</h4>
+                                <p class="desc font-roboto-r">In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-project events animated opacity" data-direction="fadeInRight">
+                        <a class="center-block text-none" href="#">
+                            <img src="{% static 'content/program3.jpg' %}">
+                            <div class="caption">
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                                <h4 class="title font-roboto-bl">Arts Programs</h4>
+                                <p class="desc font-roboto-r">In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </div>
+        <div class="button-block text-center">
+            <a href="all.html" class="btn btn-white blue font-roboto-b">View All Events</a>
+        </div>
+    </div>
+</section>
+<section id="news" class="section-news sectionAnimate">
+    <div class="container">
+        <h4 class="title font-roboto-bl text-center animated opacity" data-direction="fadeInUp">
+            <span class="text-blue">Our</span>
+            <span class="text-yellow">News</span>
+        </h4>
+        <div class="row">
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-news animated opacity" data-direction="zoomIn">
+                        <a class="center-block text-none" href="#">
+                            <img src="{% static 'content/program1.jpg' %}">
+                            <div class="caption">
+                                <h4 class="title font-roboto-bl">Arts Programs</h4>
+                                <p class="desc font-roboto-r">
+                                    In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                                </p>
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-news animated opacity" data-direction="zoomIn">
+                        <a class="center-block text-none" href="#">
+                            <img src="{% static 'content/program2.jpg' %}">
+                            <div class="caption">
+                                <h4 class="title font-roboto-bl">Arts Programs</h4>
+                                <p class="desc font-roboto-r">
+                                    In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                                </p>
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-news animated opacity" data-direction="zoomIn">
+                        <a class="center-block text-none" href="#">
+                            <img src="{% static 'content/program3.jpg' %}">
+                            <div class="caption">
+                                <h4 class="title font-roboto-bl">Arts Programs</h4>
+                                <p class="desc font-roboto-r">
+                                    In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                                </p>
+                                <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </div>
+        <div class="button-block text-center">
+            <a href="all.html" class="btn btn-blue font-roboto-b">View All News</a>
+        </div>
+    </div>
+</section>
+<section id="multimedia" class="section-multimedia sectionAnimate">
+    <div class="container">
+        <h4 class="title font-roboto-bl text-center animated opacity" data-direction="fadeInUp">
+            <span class="text-blue">Our</span>
+            <span class="text-yellow">Multimedia</span>
+        </h4>
+        <div class="row">
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-multimedia events animated opacity" data-direction="fadeInLeft">
+                        <a href="#" class="video center-block" data-toggle="modal" data-target="#AboutModal">
+                            <img src="{% static 'content/about.jpg' %}" class="img-responsive">
+                            <i class="fa fa-play-circle-o"></i>
+                        </a>
+                        <div class="caption">
+                            <h4 class="title font-roboto-bl">Arts Programs</h4>
+                            <p class="desc font-roboto-r">
+                                In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                            </p>
+                            <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-multimedia events animated opacity" data-direction="fadeInUp">
+                        <a href="#" class="video center-block" data-toggle="modal" data-target="#AboutModal">
+                            <img src="{% static 'content/about.jpg' %}" class="img-responsive">
+                            <i class="fa fa-play-circle-o"></i>
+                        </a>
+                        <div class="caption">
+                            <h4 class="title font-roboto-bl">Arts Programs</h4>
+                            <p class="desc font-roboto-r">
+                                In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                            </p>
+                            <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-multimedia events animated opacity" data-direction="fadeInRight">
+                        <a href="#" class="video center-block" data-toggle="modal" data-target="#AboutModal">
+                            <img src="{% static 'content/about.jpg' %}" class="img-responsive">
+                            <i class="fa fa-play-circle-o"></i>
+                        </a>
+                        <div class="caption">
+                            <h4 class="title font-roboto-bl">Arts Programs</h4>
+                            <p class="desc font-roboto-r">
+                                In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                            </p>
+                            <p class="time font-roboto-l-i"><time><i class="fa fa-calendar"></i> June 3, 2016</time></p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="button-block text-center">
+            <a href="all.html" class="btn btn-yellow font-roboto-b">View All Multimedia</a>
+        </div>
+    </div>
+</section>
+<section id="kolektiv" class="section-multimedia sectionAnimate">
+    <div class="container">
+        <h4 class="title font-roboto-bl text-center animated opacity" data-direction="fadeInUp">
+            <span class="text-blue">Our</span>
+            <span class="text-yellow">Team</span>
+        </h4>
+        <div class="row">
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-multimedia events animated opacity" data-direction="fadeInLeft">
+                        <img src="{% static 'content/about.jpg' %}" class="img-responsive">
+                        <div class="caption">
+                            <h4 class="title font-roboto-bl">Arts Programs</h4>
+                            <p class="desc font-roboto-r">
+                                In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-multimedia events animated opacity" data-direction="fadeInUp">
+                        <img src="{% static 'content/about.jpg' %}" class="img-responsive">
+                        <div class="caption">
+                            <h4 class="title font-roboto-bl">Arts Programs</h4>
+                            <p class="desc font-roboto-r">
+                                In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="thumbnail thumbnail-multimedia events animated opacity" data-direction="fadeInRight">
+                        <img src="{% static 'content/about.jpg' %}" class="img-responsive">
+                        <div class="caption">
+                            <h4 class="title font-roboto-bl">Arts Programs</h4>
+                            <p class="desc font-roboto-r">
+                                In our kids&#x27; painting classes, we guarantee the best personalized instruction and one-on-one guidance for every single child who walks through our door.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="button-block text-center">
+            <a href="all.html" class="btn btn-yellow font-roboto-b">View All Team</a>
+        </div>
+    </div>
+</section>
+<section id="contact" class="section-contact sectionAnimate">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl animated opacity" data-direction="fadeInUp">Our Contact</h4>
+        <p class="desc text-center font-roboto-r animated opacity" data-direction="fadeInUp">
+            Our Featured Programs are selected through a rigorous process and uniquely created for each semester.
+        </p>
+        <div class="row">
+            <div class="col-md-7">
+                <form class="form form-contact c-white font-roboto-r animated opacity" data-direction="zoomIn">
+                    <p class="form-title text-uppercase font-roboto-l">send us a message</p>
+                    <p class="form-desc">We are an independent gym that is committed to working with you to gain the results you. want. </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-project" placeholder="YOUR NAME">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="email" class="form-control input-project" placeholder="EMAIL ADRESS">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-project" placeholder="SUBJECT">
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <textarea class="form-control textarea resize input-project" placeholder="YOUR MESSAGE"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="submit" class="btn btn-yellow btn-block text-uppercase">
+                                <span class="btn-text pull-left">Submit your message</span>
+                                <i class="fa fa-chevron-right pull-right"></i>
+                            </button>
+                            <p class="email-text font-open-s-l nm">Make sure you put a valid email.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <div class="contact-block animated opacity" data-direction="zoomIn">
+                    <p class="contact-title text-uppercase font-open-s-l">contact info</p>
+                    <p class="contact-desc">
+                        Ut volutpat consectetur aliquam. Curabitur auctor in nis ulum ornare.
+                        Sed consequat, augue condimentum fermentum gravida, metus elit vehicula dui.
+                    </p>
+                    <ul class="nav nav-contact-list font-open-s-r">
+                        <li><a href="tel:+1-900-342-9876"><i class="fa fa-mobile"></i>+1-900-342-9876</a></li>
+                        <li><a href="mailto:info@gymsports.com"><i class="fa fa-envelope-o"></i>info@pandaschool.az</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+<!-- Modal -->
+{% block base-modal %}
+<div class="modal modal-about fade" id="AboutModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <iframe width="100%" height="300" src="{{ about_us.video|get_youtube_embed_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-block">
+            <img src="{% static 'img/logo.png' %}" class="img-responsive center-block">
+            <ul class="nav nav-social">
+                {% if footer_links %}
+                    {% for link in footer_links %}
+                        {% if link.name == 'youtube' %}
+                            <li><a class="{{ link.name }}" href="{{ link.link }}"><i class="fa fa-{{ link }}-square"></i></a></li>
+                        {% else %}
+                            <li><a class="{{ link.name }}" href="{{ link.link }}"><i class="fa fa-{{ link }}"></i></a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

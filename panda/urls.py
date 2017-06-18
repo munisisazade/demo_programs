@@ -23,9 +23,9 @@ from school.models import AdminPanelUrl
 
 
 urlpatterns = [
-    url(r'^panda-sayt/', admin.site.urls),
-    url(r'^',include('website.urls')),
-    url(r'^panda-sistem/', include('school.urls')),
+    #url(r'^panda-sayt/', admin.site.urls),
+    #url(r'^',include('website.urls')),
+    url(r'^', include('school.urls')),
     # url(r'^football/', include('football.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

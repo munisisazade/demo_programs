@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="Təhsil şirkəti, Təhsil mərkəzi, Ali məktəblərə hazırlıq, Universitetlərə hazırlıq, Məktəbəqədər hazırlıq, Kids, Poliqlot, Polyglot, Dil kursları, Xarici dillərin tədrisi, İngilis və rus dillərinin tədrisi, İngilis dili, Xaricdə təhsil, Böyük Britaniyada təhsil, İELTS, Magistraturaya hazırlıq, MBA, Lisey, Bağça, Uşaq bağçası">
+    <meta name="description" content="This is the home page.">
+    <meta name="country" content="Azerbaijan" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="author" content="Munis && Azer">
+    <meta name="copyright" content="copyright {% now 'Y' %} - pandaschool.az" />
+
+    <title>{% block title %} PandaSchool Təhsil mərkəzi - Ana səhifə {% endblock %}</title>
+
+    <!-- injector:css -->
+    {% load website_tool %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/design.min.css' %}">
+    <!-- endinjector -->
+
+    <!-- injector:js -->
+    <script src="{% static 'js/min/assets/jquery.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/owl.min.js' %}"></script>
+    <script src="{% static 'js/min/app.min.js' %}"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-77787243-3', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+    <!-- endinjector -->
+
+</head>
+<body data-spy="scroll" data-target="#nav-menu">
+{% block menu-nav %}
+<header class="header ">
+    <nav class="navbar navbar-project nm-b nb">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo center-block" href="{% url 'index' %}">
+                    <img src="{% static 'img/logo.png' %}" class="img-responsive">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse nb" id="bs-example-navbar-collapse-1">
+                <div id="nav-menu">
+                    <ul class="nav nav-menu index-menu navbar-nav navbar-right nm-t font-roboto-b">
+                        {% if base_menu %}
+                            {% for nav in base_menu %}
+                            <li {% if forloop.first %}class="active"{% endif %}><a href="{{ nav.link }}">{{ nav.name }}</a></li>
+                                {% if forloop.counter|divisibleby:7 %}
+                                <li class="dropdown vacancy">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vakansiya <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        {% for vacancy in vacancy_list %}
+                                            <li><a href="{% url 'vacancy-list' %}?vacancy_country={{ vacancy.slug }}">{{ vacancy.name }}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<header class="header hide">
+    <nav class="navbar navbar-project nm-b nb">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo center-block" href="{% url 'index' %}">
+                    <img src="{% static 'img/logo.png' %}" class="img-responsive">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse nb" id="bs-example-navbar-collapse-2">
+                <ul class="nav nav-menu navbar-nav navbar-right nm-t font-roboto-b">
+                    {% if base_menu %}
+                        {% for nav in base_menu %}
+                        <li {% if forloop.first %}class="active"{% endif %}><a href="{{ nav.link }}">{{ nav.name }}</a></li>
+                         {% if forloop.counter|divisibleby:7 %}
+                        <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Vakansiya <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            {% for vacancy in vacancy_list %}
+                                <li><a href="{% url 'vacancy-list' %}?vacancy_country={{ vacancy.slug }}">{{ vacancy.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                        {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block base-modal %}
+<div class="modal modal-about fade" id="AboutModal" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <iframe width="100%" height="300" src="{{ about_us.video|get_youtube_embed_url }}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<footer class="footer">
+    <div class="container">
+        <div class="footer-block">
+            <img src="{% static 'img/logo.png' %}" class="img-responsive center-block">
+            <ul class="nav nav-social">
+                {% if footer_links %}
+                    {% for link in footer_links %}
+                        {% if link.name == 'youtube' %}
+                            <li><a class="{{ link.name }}" href="{{ link.link }}"><i class="fa fa-{{ link }}-square"></i></a></li>
+                        {% else %}
+                            <li><a class="{{ link.name }}" href="{{ link.link }}"><i class="fa fa-{{ link }}"></i></a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

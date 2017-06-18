@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Axtardığınız səhifə mövcud deyil</title>
+</head>
+<body>
+
+<h1>Tapılmadı</h1>
+<p>Axtardığınız URL {{ request.get_full_path }} bu serverdə mövcud deyil</p>
+<script>
+    window.location.href = '/';
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="tags for website">
+    <meta name="description" content="This is the home page.">
+    <meta name="author" content="">
+    
+    <title> Home - Home </title>
+    
+    <!-- injector:css -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/design.min.css' %}">
+    <!-- endinjector -->
+
+    <!-- injector:js -->
+    <script src="{% static 'js/min/assets/jquery.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/owl.min.js' %}"></script>
+    <script src="{% static 'js/min/app.min.js' %}"></script>
+    <!-- endinjector -->
+
+</head>
+<body data-spy="scroll" data-target="#nav-menu">
+
+<header class="header hide">
+    <nav class="navbar navbar-project nm-b nb">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo center-block" href="index.html">
+                    <img src="{% static 'img/logo.png' %}" class="img-responsive">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse nb" id="bs-example-navbar-collapse-1">
+                <div id="nav-menu">
+                    <ul class="nav nav-menu index-menu navbar-nav navbar-right nm-t font-roboto-b">
+                        <li class="active"><a href="#body">Ana Sahife</a></li>
+                        <li><a href="#about">Haqqimizda</a></li>
+                        <li><a href="#programs">Programlar</a></li>
+                        <li><a href="#events">Tedbirler</a></li>
+                        <li><a href="#news">Xeberler</a></li>
+                        <li><a href="#multimedia">Multimedia</a></li>
+                        <li><a href="#kolektiv">Kolektiv</a></li>
+                        <li><a href="#contact">Elaqe</a></li>
+                    </ul>
+                </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+<header class="header ">
+    <nav class="navbar navbar-project nm-b nb">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo center-block" href="index.html">
+                    <img src="{% static 'img/logo.png' %}" class="img-responsive">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse nb" id="bs-example-navbar-collapse-2">
+                <ul class="nav nav-menu navbar-nav navbar-right nm-t font-roboto-b">
+                    <li><a href="index.html">Ana Sahife</a></li>
+                    <li><a href="about.html">Haqqimizda</a></li>
+                    <li><a href="all.html">Programlar</a></li>
+                    <li><a href="all.html">Tedbirler</a></li>
+                    <li><a href="all.html">Xeberler</a></li>
+                    <li><a href="all.html">Multimedia</a></li>
+                    <li><a href="all.html">Kolektiv</a></li>
+                    <li><a href="contact.html">Elaqe</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+</header>
+
+<section class="section-contact each-contact">
+    <div class="container">
+        <h4 class="title text-center font-roboto-bl">Our Contact</h4>
+        <p class="desc text-center font-roboto-r">
+            Our Featured Programs are selected through a rigorous process and uniquely created for each semester.
+        </p>
+        <div class="row">
+            <div class="col-md-7">
+                <form class="form form-contact c-white font-roboto-r">
+                    <p class="form-title text-uppercase font-roboto-l">send us a message</p>
+                    <p class="form-desc">We are an independent gym that is committed to working with you to gain the results you. want. </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-project" placeholder="YOUR NAME">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="email" class="form-control input-project" placeholder="EMAIL ADRESS">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text" class="form-control input-project" placeholder="SUBJECT">
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <textarea class="form-control textarea resize input-project" placeholder="YOUR MESSAGE"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <button type="submit" class="btn btn-yellow btn-block text-uppercase">
+                                <span class="btn-text pull-left">Submit your message</span>
+                                <i class="fa fa-chevron-right pull-right"></i>
+                            </button>
+                            <p class="email-text font-open-s-l nm">Make sure you put a valid email.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-5">
+                <div class="contact-block">
+                    <p class="contact-title text-uppercase font-open-s-l">contact info</p>
+                    <p class="contact-desc">
+                        Ut volutpat consectetur aliquam. Curabitur auctor in nis ulum ornare.
+                        Sed consequat, augue condimentum fermentum gravida, metus elit vehicula dui.
+                    </p>
+                    <ul class="nav nav-contact-list font-open-s-r">
+                        <li><a href="tel:+1-900-342-9876"><i class="fa fa-mobile"></i>+1-900-342-9876</a></li>
+                        <li><a href="mailto:info@gymsports.com"><i class="fa fa-envelope-o"></i>info@pandaschool.az</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-block">
+            <img src="{% static 'img/logo.png' %}" class="img-responsive center-block">
+            <ul class="nav nav-social">
+                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a class="youtube" href="#"><i class="fa fa-youtube-square"></i></a></li>
+                <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+<script src="//localhost:35729/livereload.js"></script>
+</body>
+</html>
