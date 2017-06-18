@@ -1,0 +1,82 @@
+{% extends 'home/dashboard.html' %}
+{% load widget_tweaks %}
+{% block datetimepicker %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+{% endblock %}
+{% block content-inside %}
+
+<!--USERS VISIBLE PART-->
+                    <div class="users relative hide">
+
+                    </div>
+                    <!--ADMIN VISIBLE PART-->
+                    <div class="admin">
+                        <form class="form form-project" method="post">
+                            {% csrf_token %}
+                            <div class="panel panel-project center-block font-monts-r">
+                                <div class="panel-heading">
+                                    <h2 class="title nm">Şagird yaradın</h2>
+                                    <p>Nəzərə alınki yaratdığınız şagird {{ request.user.branch }} filialına aiddir</p>
+                                </div>
+                                <div class="panel-body np-l np-r">
+                                    <div class="row">
+
+                                        {% for field in form.visible_fields %}
+                                            {% if field.html_name == 'birthday' %}
+
+                                            <div class='col-md-6'>
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+
+                                                        <input type="date" value="{% now "F/d/Y" %}" name="birthday" class="form-control input-project">
+
+                                                        {% if field.errors %}<span class="text-help center-block" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+
+                                                </div>
+                                            </div>
+                                            {% elif field.html_name == 'plan' %}
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+                                                    {{ field|add_class:'form-control input-project'|attr:'value:12' }}
+                                                    {% if field.errors %}<span class="text-help center-block text-danger" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+                                                </div>
+                                            </div>
+
+                                            {% else %}
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+                                                    {{ field|add_class:'form-control input-project' }}
+                                                    {% if field.errors %}<span class="text-help center-block text-danger" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+
+                                        {% endfor %}
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Seçdiyi məllim</label>
+                                                <select class="select-tag form-control input-project" name="teacher_list" multiple>
+                                                    {% for teach in teachers %}
+                                                    <option value="{{ teach.teach.id }}">{{ teach.get_full_name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <span class="text-help center-block text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="button-block text-uppercase">
+                                    <button class="btn btn-success pull-right">Yadda Saxla</button>
+                                </div>
+                                <a href="{% url 'student-list' %}" class="btn btn-danger pull-right">İmtina et</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+{% endblock %}

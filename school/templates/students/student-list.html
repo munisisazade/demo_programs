@@ -1,0 +1,90 @@
+{% extends 'home/dashboard.html' %}
+{% load static %}
+{% block datetimepicker %}
+    <script src="{% static 'js/customize.js' %}"></script>
+{% endblock %}
+{% block content-inside %}
+                    <!--USERS VISIBLE PART-->
+                    <div class="users relative hide">
+
+                    </div>
+                    <!--ADMIN VISIBLE PART-->
+                    <div class="admin">
+                        <form class="form form-search" method="get">
+                            <h4 class="title font-monts-r nm-t">Müvəqqəti qeydiyyat cədvəli</h4>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="search" name="q" class="form-control input-project search" {% if kes %} value="{{ kes }}" {% endif %} placeholder="Axtar..." aria-describedby="basic-addon2">
+                                    <span class="input-group-addon np"><button type="submit" class="btn btn-blue nr"><i class="fa fa-search"></i></button></span>
+                                </div>
+                            </div>
+
+                        </form>
+                        <div class="table-block">
+                            <!--TABLES-->
+                            <div class="table-responsive">
+                                <table class="table table-striped table-payment">
+                                    <thead class="font-monts-b">
+                                    <tr>
+                                        <td>S.A.A</td>
+                                        <td>Yazıldığı tarix</td>
+                                        <td>Plan</td>
+                                        <td>status</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="font-monts-r">
+                                    {% for student in object_list|slice:"100" %}
+                                    <tr>
+                                        {% if other_system %}
+                                        <td class="student-{{ student.id }}"><a href="{% url 'student-update' pk=student.pk %}" class="name text-none {% if student.testiq %}green{% endif %}">{{ student.full_name }}</a></td>
+                                        {% else %}
+                                        <td class="student-{{ student.id }}">{% if student.testiq %}<img src="{% static 'img/panda.png' %}" class="img-responsive">{% endif %}<a href="{% url 'student-update' pk=student.pk %}" class="name text-none {% if student.testiq %}green{% endif %}">{{ student.full_name }}</a></td>
+                                        {% endif %}
+                                        <td>{{ student.start|date:"d/F/Y" }}</td>
+                                        <td>{{ student.plan }}</td>
+                                        {% if other_system %}
+                                         <td class="button-{{ student.id }}"><button class="btn btn-success {% if student.testiq %}{% else %}btnConfirms{% endif %}"  data-toggle="modal" data-id="{{ student.id }}" {% if student.testiq %}disabled="disabled"{% endif %} data-target="#PaymentModal">{% if student.testiq %}Təstiqləndi{% else %}Təstiqlə{% endif %}</button></td>
+                                        {% else %}
+                                         <td class="button-{{ student.id }}"><button class="btn btn-success {% if student.testiq %}{% else %}btnConfirm{% endif %}"  data-toggle="modal" data-id="{{ student.id }}" {% if student.testiq %}disabled="disabled"{% endif %} data-target="#PaymentModal">{% if student.testiq %}Təstiqləndi{% else %}Təstiqlə{% endif %}</button></td>
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                    <!--<tr>
+                                        <td><img src="{% static 'img/panda.png' %}" class="img-responsive"> <a href="#" class="name text-none green">Suleymanov Azer Behrem</a></td>
+                                        <td>05/10/2017</td>
+                                        <td>20</td>
+                                        <td><button class="btn btn-success btnConfirm"  data-toggle="modal" data-target="#PaymentModal">Ode</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="{% static 'img/panda.png' %}" class="img-responsive"> <a href="#" class="name text-none red">Suleymanov Azer Behrem</a></td>
+                                        <td>05/10/2017</td>
+                                        <td>20</td>
+                                        <td><button class="btn btn-success btnConfirm"  data-toggle="modal" data-target="#PaymentModal">Ode</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="{% static 'img/panda.png' %}" class="img-responsive"> <a href="#" class="name text-none">Suleymanov Azer Behrem</a></td>
+                                        <td>05/10/2017</td>
+                                        <td>20</td>
+                                        <td><button class="btn btn-success btnConfirm"  data-toggle="modal" data-target="#PaymentModal">Ode</button></td>
+                                    </tr>-->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+{% endblock %}
+{% block modal %}
+<!-- Modal -->
+<div class="modal modal-payment fade" id="PaymentModal"  role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="myModalLabel">Təsdiqləndi</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

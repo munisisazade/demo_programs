@@ -1,0 +1,48 @@
+{% extends 'home/dashboard.html' %}
+{% load widget_tweaks %}
+{% block datetimepicker %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+{% endblock %}
+{% block content-inside %}
+
+<!--USERS VISIBLE PART-->
+                    <div class="users relative hide">
+
+                    </div>
+                    <!--ADMIN VISIBLE PART-->
+                    <div class="admin">
+                        <form class="form form-project" method="post">
+                            {% csrf_token %}
+                            <div class="panel panel-project center-block font-monts-r">
+                                <div class="panel-heading">
+                                    <h2 class="title nm">Yeni Filial Yarat</h2>
+                                </div>
+                                <div class="panel-body np-l np-r">
+                                    <div class="row">
+
+                                        {% for field in form.visible_fields %}
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+                                                    {{ field|add_class:'form-control input-project' }}
+                                                    {% if field.errors %}<span class="text-help center-block text-danger" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+                                                </div>
+                                            </div>
+
+
+                                        {% endfor %}
+
+                                    </div>
+                                </div>
+                                <div class="button-block text-uppercase">
+                                    <button class="btn btn-success pull-right">Yadda Saxla</button>
+                                </div>
+                                <a href="{% url 'main-branch' %}" class="btn btn-danger pull-right">İmtina et</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+{% endblock %}

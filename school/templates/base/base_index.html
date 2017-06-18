@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if IE 9]><html class="no-js ie9" lang="en"><![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="tags for website">
+    <meta name="description" content="This is the Login page.">
+    <meta name="author" content="Munis Isazade & Azer Suleymanov">
+
+    <title> {% if allow %} Pandaschool administration - Login {% else %} You don't have a permission to access here {% endif %}</title>
+
+    {% load static %}
+
+    <!-- injector:css -->
+    <link rel="stylesheet" href="{% static 'css/design-admin.min.css' %}">
+    <!-- endinjector -->
+    <!-- My custom css -->
+    <link rel="stylesheet" href="{% static 'css/customize.css' %}">
+    <!-- end my custom css -->
+
+    <!-- injector:js -->
+    <script src="{% static 'js/min/assets/jquery.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/chosen.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/moment.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/daterangepicker.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/multiple-select.min.js' %}"></script>
+    <script src="{% static 'js/min/assets/select2.min.js' %}"></script>
+    <script src="{% static 'js/min/app-admin.min.js' %}"></script>
+
+    <!-- endinjector -->
+    {% block datetimepicker %}
+    {% endblock %}
+
+</head>
+<body>
+
+<!--Login Header-->
+{% block header %}
+<header class="header-admin login ">
+    <h3 class="title text-center font-monts-r nm">PandaSchool administrasiya</h3>
+</header>
+{% endblock %}
+{% block content %}
+<section class="section-admin-form relative">
+    <div class="container-fluid">
+        <div class="login-block transform-middle center-block font-monts-r">
+            {% if allow %}
+            <h1 class="title text-center text-uppercase nm-t">Daxil ol</h1>
+            <!--class "has-error" and "has success" must be in form-group  while check-->
+            {% if messages %}
+            {% for message in messages %}
+            <p class="alert alert-danger text-center has-error">{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            <p class="alert alert-danger text-center hide">Sehv ucun yer!</p>
+            <form class="form form-admin" method="POST">
+                {% csrf_token %}
+
+                {% for field in form.visible_fields %}
+                {% if field.html_name == 'username' %}
+                <div class="form-group relative">
+                    <span class="icon hidden-xs"><i class="fa fa-user" aria-hidden="true"></i></span>
+                    <label>{{ field.label }}:</label>
+                    {{ field }}
+                </div>
+                {% else %}
+                <div class="form-group relative">
+                    <span class="span-icon icon hidden-xs"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                    <label>{{ field.label }}:</label>
+                    {{ field }}
+                </div>
+                {% endif %}
+                {% endfor %}
+                <div class="form-group">
+                    <button type="submit" class="btn btn-blue btn-block nr text-uppercase">
+                        <i class="fa fa-paper-plane fa-fw"></i> GÖNDƏR
+                    </button>
+                </div>
+            </form>
+            {% else %}
+            <img src="{% static 'img/403forbiddenerror.jpg' %}" style="width:100%" alt="You don't have a permission to access here">
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block modal %}
+{% endblock %}
+<footer>
+{% block footer-js %}
+
+{% endblock %}
+</footer>
+</body>
+</html>

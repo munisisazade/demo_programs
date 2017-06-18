@@ -1,0 +1,57 @@
+.status {
+    color: #ff0009;
+    font-size: 16px;
+}
+
+.emeliyyat {
+    margin: auto;
+    width: 95px;
+    color: #fff;
+}
+.bg-red {
+   background-color: red !important;
+}
+
+.status b {
+    font-size: 14px;
+}
+
+.modal-payment .modal-dialog {
+   margin-top: 0;
+   margin-bottom: 0;
+   top: 50%;
+   max-width: 400px;
+}
+.modal-payment .modal-content {
+   background: rgba(0, 194, 160, 0.7);
+}
+.modal-payment .modal-header {
+   border: 0;
+}
+.modal-payment .modal-header .modal-title {
+   color: #fff;
+}
+.modal-payment .close {
+   opacity: 0;
+   position: relative;
+   z-index: -999;
+}
+.modal-add-payment .modal-dialog {
+   margin-top: 0;
+   margin-bottom: 0;
+   top: 35%;
+   max-width: 400px;
+}
+.modal-add-payment .modal-header {
+   border: 0;
+   background: #00C02D;
+}
+.modal-add-payment .modal-header .modal-title {
+   color: #fff;
+}
+.modal-add-payment .modal-body .button-block {
+   padding-top: 20px;
+}
+.attendance {
+    cursor: pointer !important;
+}

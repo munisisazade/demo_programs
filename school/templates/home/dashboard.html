@@ -1,0 +1,381 @@
+{% extends "base/base_index.html" %}
+{% load school_app %}
+{% load static %}
+{% block header %}
+    {% if other_system %}
+        <style>
+            .section-profile .profile-left .title {
+                background:{% if admin_color %}linear-gradient(to bottom, #000000,{{ admin_color }}){% else %}linear-gradient(to bottom, #000000,#00c02d){% endif %} !important;
+            }
+            .section-profile .profile-left {
+                background:{% if admin_color %}linear-gradient(to bottom, #000000,{{ admin_color }}){% else %}linear-gradient(to bottom, #000000,#00c02d){% endif %} !important;
+            }
+            .bg-blue {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .nav-profile-list>li a:hover, .nav-profile-list>li a:active, .nav-profile-list>li a:focus {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .nav-profile>li>ul>li a:hover {
+                color:#fff !important;
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .nav-profile>li>ul>li a {
+                color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .btn-blue {
+                color: #fff;
+                background-color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+                border-color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .table-payment thead tr {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .table-jurnal thead tr {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .btn-success {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .green {
+                color:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .modal-add-payment .modal-header {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+            .modal-payment .modal-content {
+                background:{% if admin_color %}{{ admin_color }}{% else %}#00C02D{% endif %} !important;
+            }
+        </style>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if allow %}
+        <!--New desing -->
+        <div class="section-profile">
+            <div class="container-fluid np">
+                <div class="row nm">
+                    <div class="profile-left col-md-2 col-sm-3 hidden-xs np">
+                        <div class="profile-left-block">
+                            <h3 class="title text-center nm font-monts-r">
+                                <a href="{% url 'dashboard' %}">
+                                    {% if other_system %}
+                                    <img src="{{ admin_logo|get_image_path }}" class="img-responsive center-block">
+                                    {% else %}
+                                    <img src="{% static 'img/logo.png' %}" class="img-responsive center-block">
+                                    {% endif %}
+                                </a>
+                            </h3>
+                            <div class="media media-profile font-monts-r">
+                                <div class="media-left">
+                                    <img src="{% if request.user.profile_picture %}/media/{{ request.user.profile_picture }}{% else %}http://www.cdn.innesvienna.net//Content/user-default.png{% endif %}" class="media-object img-circle">
+                                </div>
+                                <div class="media-body">
+                                    <p class="welcome">Xoş gəlmişsiniz,</p>
+                                    <p class="name nm">{{ request.user.get_full_name }}</p>
+                                    <span class="status"><b>statusu:</b>{{ userstatus|find_usertype }}</span>
+                                </div>
+                            </div>
+                            <ul class="nav nav-profile-list font-monts-r">
+                                {% if userstatus == 1 %}
+                                <li>
+                                    <a href="{% url 'teacher-jurnal' %}">Jurnal </a>
+
+                                </li>
+                                {% elif userstatus == 2 %}
+                                <li>
+                                    <a href="{% url 'student-list' %}">Qeydiyyat cədvəli </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'student-add' %}">Tələbə əlavə et</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'teacher-list' %}">Müəllimlərin siyahısı</a>
+                                </li>
+                                {% comment %}<li>
+                                    <a href="#">Uşaqlar<span class="text-right pull-right"><i class="fa fa-plus"></i></span></a></a>
+                                    <ul class="nav nav-profile-list-inside">
+                                        <li><a href="{% url 'student-list' %}">Uşaqların siyahısı</a></li>
+                                        <li><a href="#">Uşaqların qeydiyyatı</a></li>
+                                        <li><a href="#">Müvəqqəti qeydiyyat</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Muellimler <span class="text-right pull-right"><i class="fa fa-plus"></i></span></a></a>
+                                    <ul class="nav nav-profile-list-inside">
+                                        <li><a href="{% url 'teacher-list' %}">Müəllimlərin siyahısı</a></li>
+                                        <li><a href="{% url 'teacher-jurnal' %}">Jurnal</a></li>
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">Home</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Statistika <span class="text-right pull-right"><i class="fa fa-plus"></i></span></a></a>
+                                    <ul class="nav nav-profile-list-inside">
+                                        <li><a href="{% url 'teacher-list' %}">Fənlər üzrə statistika</a></li>
+                                        <li><a href="#">Müəllimlərin maaş cədvəli</a></li>
+                                        <li><a href="#">Ad günü təbriki smsləri</a></li>
+                                        <li><a href="#">Home</a></li>
+                                    </ul>
+                                </li>{% endcomment %}
+                                {% else %}
+                                    {% if request.user.branch_status %}
+                                    {% else %}
+                                    <li>
+                                        <a href="{% url 'dashboard' %}">Ana səhifə</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'branch-create' %}">Yeni Filial Yarat</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'main-branch' %}">Mövcud filiallar</a>
+                                    </li>
+                                    {% endif %}
+                                    {% if menu_show or request.user.branch_status %}
+                                        <li>
+                                            <a href="{% url 'manager-add' %}">Menecer yarat</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'manager-list' %}">Menecerlərin siyahısı</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'teacher-add' %}">Müəllim yarat</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'teacher-list' %}">Məllimlərin siyahısı</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'student-add' %}">Şagird yarat</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'student-list' %}">Qeydiyyat cədvəli</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
+                                        </li>
+                                        {% if other_system %}
+                                        {% else %}
+                                        <li>
+                                            <a href="{% url 'security' %}">Sistemə qoşulu cihazlar</a>
+                                        </li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% comment %}<li>
+                                    <a href="{% url 'student-list' %}">Qeydiyyat cədvəli </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'student-add' %}">Tələbə əlavə et</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'teacher-list' %}">Müəllimlərin siyahısı</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'security' %}">Təhlükəsizlik</a>
+                                </li>{% endcomment %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="profile-right col-md-10 col-sm-9 col-md-offset-2 col-sm-offset-3 np">
+                        <div class="profile-header bg-blue">
+                            <div class="row">
+                                <div class="col-sm-4 col-xs-2">
+                                    <a href="#" class="Bars hidden-xs">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                    <!--MOBILE-->
+                                    <a href="#" class="Bars-mobile visible-xs hideMenu">
+                                        <i class="fa fa-bars"></i>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4 hidden-xs">
+                                    <div class="title-block">
+                                        <h4 class="title text-center font-monts-r">{% block base-head %}{% if menu_show %}{% if object.name == request.user.branch.name %}{{ request.user.branch.name }}{% else %}{% if object.name %}{{ object.name }}{% else %}{{ request.user.branch.name }}{% endif %}{% endif %}{% else %}Əsas Lövhə{% endif %}{% endblock %}</h4>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-10">
+                                    <ul class="nav nav-profile navbar-right font-monts-r">
+                                        <li>
+                                            <a href="#" class="clearfix">
+                                                <img src="{% if request.user.profile_picture %}/media/{{ request.user.profile_picture }}{% else %}http://www.cdn.innesvienna.net//Content/user-default.png{% endif %}" class="img-circle img-responsive pull-left">
+                                                <span class="name pull-right">{{ request.user.get_full_name }} <i class="fa fa-angle-down"></i></span>
+                                            </a>
+                                            <ul class="nav nav-profile font-monts-r">
+                                                <li><a href="{% url 'user-settings' %}">Haqqımda məlumat</a></li>
+                                                <li><a href="{% url 'logout' %}">Çıxış</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content relative">
+                            {% comment %}<p class="text-center red">Pandaschoolda yenilik artıq Jurnallarda olan gec acilma prosesi həll olundu. Jurnallarin gec acildiğı üçün müəllimlərdən üzr istəyirik hörmətlə Administrasiya.</p>{% endcomment %}
+                            {% comment %}{% if userstatus == 3 %}
+                            <p class="text-center red">Salam Administrator, Artiq Jurnallarda gec acilma problemi aradan qaldirildi. Ve her bir muellimin jurnalinda yenilik</p>
+                            {% endif %}
+
+                            {% if userstatus == 1 %}
+                            <p class="text-center red">Salam Müəllim, Bu gündən etibarən yalnız bir gün yəni sistemə daxil olduğunuz günlər üçün plus qoymaq olacaq. Günün tarixi {% now 'Y/m/d' %} </p>
+                            {% endif %}{% endcomment %}
+                            {% block content-inside %}
+                            <div class="users relative">
+                                {% if userstatus == 1 %}
+                                <a href="{% url 'teacher-jurnal' %}" class="btn btn-blue transform-middle font-monts-r nr">Jurnala Daxil Ol</a>
+                                {% elif userstatus == 3 %}
+                                    {% if object %}
+                                    {% else %}
+                                        {% if request.user.branch_status %}
+                                        <div class="page-header text-center">
+                                        <h1>Xoş gəlmisiniz {{ request.user.get_full_name }}</h1>
+                                        <p>Siz yalniz {{ request.user.branch.name }} -na nəzarət edə bilərsiz</p>
+                                        </div>
+
+                                        {% else %}
+                                    <div class="page-header text-center">
+                                        <h1>Xoş gəlmisiniz {{ request.user.get_full_name }}</h1>
+                                        <p>Zəhmət olmasa aşagıdakı filiallardan birini seçin </p>
+                                    </div>
+                                    <div class="row text-center">
+                                        {% for baseurl in branch_list %}
+                                            <p><a class="btn bg-blue btn-primary btn-lg" href="{% url 'branch-list' slug=baseurl.slug %}" role="button">{{ baseurl.name }}</a></p>
+                                        {% empty %}
+
+                                        {% endfor %}
+                                    </div>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="admin">
+
+                            </div>
+                            {% endblock %}
+                        </div>
+                    </div>
+                    <!--MOBILE MENU-->
+                    <div class="profile-left col-md-2 col-sm-3 visible-xs np">
+                        <div class="profile-left-block">
+                            <div class="media media-profile font-monts-r">
+                                <div class="media-left">
+                                    <img src="{% if request.user.profile_picture %}/media/{{ request.user.profile_picture }}{% else %}http://www.cdn.innesvienna.net//Content/user-default.png{% endif %}" class="media-object img-circle">
+                                </div>
+                                <div class="media-body">
+                                    <p class="welcome">Xoş gəlmişsiniz,</p>
+                                    <p class="name nm">{{ request.user.get_full_name }}</p>
+                                    <span class="status"><b>statusu:</b>{{ userstatus|find_usertype }}</span>
+                                </div>
+                            </div>
+                            <ul class="nav nav-profile-list font-monts-r">
+                                {% if userstatus == 1 %}
+                                <li>
+                                    <a href="{% url 'teacher-jurnal' %}">Jurnal </a>
+
+                                </li>
+                                {% elif userstatus == 2 %}
+                                <li>
+                                    <a href="{% url 'student-list' %}">Qeydiyyat cədvəli </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'student-add' %}">Tələbə əlavə et</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'teacher-list' %}">Müəllimlərin siyahısı</a>
+                                </li>
+                                {% comment %}<li>
+                                    <a href="#">Uşaqlar<span class="text-right pull-right"><i class="fa fa-plus"></i></span></a></a>
+                                    <ul class="nav nav-profile-list-inside">
+                                        <li><a href="{% url 'student-list' %}">Uşaqların siyahısı</a></li>
+                                        <li><a href="#">Uşaqların qeydiyyatı</a></li>
+                                        <li><a href="#">Müvəqqəti qeydiyyat</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Muellimler <span class="text-right pull-right"><i class="fa fa-plus"></i></span></a></a>
+                                    <ul class="nav nav-profile-list-inside">
+                                        <li><a href="{% url 'teacher-list' %}">Müəllimlərin siyahısı</a></li>
+                                        <li><a href="{% url 'teacher-jurnal' %}">Jurnal</a></li>
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">Home</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#">Statistika <span class="text-right pull-right"><i class="fa fa-plus"></i></span></a></a>
+                                    <ul class="nav nav-profile-list-inside">
+                                        <li><a href="{% url 'teacher-list' %}">Fənlər üzrə statistika</a></li>
+                                        <li><a href="#">Müəllimlərin maaş cədvəli</a></li>
+                                        <li><a href="#">Ad günü təbriki smsləri</a></li>
+                                        <li><a href="#">Home</a></li>
+                                    </ul>
+                                </li>{% endcomment %}
+                                {% else %}
+                                    <li>
+                                        <a href="{% url 'dashboard' %}">Ana səhifə</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'branch-create' %}">Yeni Filial Yarat</a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'main-branch' %}">Mövcud filiallar</a>
+                                    </li>
+                                    {% if menu_show %}
+                                        <li>
+                                            <a href="{% url 'manager-add' %}">Menecer yarat</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'manager-list' %}">Menecerlərin siyahısı</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'teacher-add' %}">Müəllim yarat</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'teacher-list' %}">Məllimlərin siyahısı</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'student-add' %}">Şagird yarat</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'student-list' %}">Qeydiyyat cədvəli</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
+                                        </li>
+                                        <li>
+                                            <a href="{% url 'security' %}">Sistemə qoşulu cihazlar</a>
+                                        </li>
+                                    {% endif %}
+                                {% comment %}<li>
+                                    <a href="{% url 'student-list' %}">Qeydiyyat cədvəli </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'student-add' %}">Tələbə əlavə et</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'payment-list' %}">Ödəniş cədvəli</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'teacher-list' %}">Müəllimlərin siyahısı</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'security' %}">Təhlükəsizlik</a>
+                                </li>{% endcomment %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+    <img src="{% static 'img/403forbiddenerror.jpg' %}" style="width:100%" alt="You don't have a permission to access here">
+    {% endif %}
+{% endblock %}

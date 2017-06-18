@@ -1,0 +1,93 @@
+{% extends 'home/dashboard.html' %}
+{% load static %}
+{% load school_app %}
+{% block datetimepicker %}
+    <script src="{% static 'js/customize.js' %}"></script>
+{% endblock %}
+{% block base-head %} İstifadəçi - Tənzimləmələri {% endblock %}
+{% block content-inside %}
+    <div class="users relative hide">
+
+    </div>
+    <!--ADMIN VISIBLE PART-->
+    <div class="admin">
+        <div class="media media-about">
+            <div class="media-left">
+                    {% csrf_token %}
+                    <img class="media-object change_src_img center-block" style="width: 500px; height: auto;" src="{% if request.user.profile_picture %}/media/{{ request.user.profile_picture }}{% else %}http://www.cdn.innesvienna.net//Content/user-default.png{% endif %}" alt="...">
+                    <p class="center-block text-center font-monts-r"><a href="#"> </a></p>
+                    <input type="file" name="profile_image" onchange="change_img(this);" class="settings-image hidden">
+                    <button class="btn btn-blue btn-block chang-img nr text-uppercase font-monts-r">FOTONU DƏYİŞ VƏ YÜKLƏ</button>
+            </div>
+            <div class="media-body">
+
+                    <div class="form-group">
+                        <label>Ad</label>
+                        <p>{{ object.first_name }}</p>
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Soyad</label>
+                        <p>{{ object.last_name }}</p>
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p>{{ object.email }}</p>
+
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Təvəllüd</label>
+                        <p>{{ object.birthday|date:"d/F/Y" }}</p>
+
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Cinsi</label>
+                        <select type="radio" name="sex" class="form-control input-project">
+                            {% if object.gender == 1 %}
+                                <option selected hidden>Kishi</option>
+                            {% else %}
+                                <option selected hidden>Qadin</option>
+                            {% endif %}
+                        </select>
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Ünvan</label>
+                        <p>{{ object.address }}</p>
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon</label>
+                        <p>{{ object.phone }}</p>
+
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Təhsil</label>
+                        <p>{{ object.study }}</p>
+
+                        <span class="text-help center-block"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Vəzifə</label>
+                        <select type="radio" name="sex" class="form-control input-project">
+                            <option selected hidden>{{ object.usertype|find_usertype }}</option>
+
+                        </select>
+                        <span class="text-help center-block"></span>
+                    </div>
+                    {% comment %}<div class="form-group">
+                        <input class="btn btn-success" type="submit" value="Yadda saxla">
+                        <input class="btn btn-danger" onclick="location.href = '{% url 'dashboard' %}'" type="" value="İmtina">
+                    </div>{% endcomment %}
+
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}

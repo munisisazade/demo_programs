@@ -1,0 +1,93 @@
+{% extends 'home/dashboard.html' %}
+{% load widget_tweaks %}
+{% block datetimepicker %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+{% endblock %}
+{% block content-inside %}
+
+
+                    <!--USERS VISIBLE PART-->
+                    <div class="users relative hide">
+
+                    </div>
+                    <!--ADMIN VISIBLE PART-->
+                    <div class="admin">
+                        <form class="form form-project" method="post">
+                            {% csrf_token %}
+                            <div class="panel panel-project center-block font-monts-r">
+                                <div class="panel-heading">
+                                    <h2 class="title nm">Müəllim əlavə edin</h2>
+                                    <p>Qeyd Əlave edəcəyiniz müəllim {{ request.user.branch.name }} filialina aid olacaq.</p>
+                                </div>
+                                <div class="panel-body np-l np-r">
+                                    <div class="row">
+
+                                        {% for field in form.visible_fields %}
+                                            {% if field.html_name != 'username'  and field.html_name != 'email' and field.html_name != 'password' %}
+                                            {% if field.html_name == 'birthday' %}
+
+                                            <div class='col-md-6'>
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+
+                                                        <input type="date" name="birthday" class="form-control input-project">
+
+                                                        {% if field.errors %}<span class="text-help center-block" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+                                                    {{ field|add_class:'form-control input-project' }}
+                                                    {% if field.errors %}<span class="text-help center-block text-danger" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endif %}
+
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div>
+                                <div class="panel-heading">
+                                    <h2 class="title nm">Sistemə daxil olması üçün məlumatları</h2>
+                                </div>
+                                <div class="panel-body np-l np-r">
+                                    <div class="row">
+                                         {% for field in form.visible_fields %}
+                                            {% if field.html_name == 'username'  or field.html_name == 'email' %}
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+                                                    {{ field|add_class:'form-control input-project' }}
+                                                    {% if field.errors %}<span class="text-help center-block text-danger" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+                                                </div>
+                                            </div>
+                                                {% elif field.html_name == 'password' %}
+                                                <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>{{ field.label }}</label>
+                                                    {{ field|add_class:'form-control input-project'|attr:'type:password' }}
+                                                    {% if field.errors %}<span class="text-help center-block text-danger" style="color:red;">{{ field.errors.as_text }}</span>{% endif %}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+
+
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                <div class="button-block text-uppercase">
+                                    <button class="btn btn-success pull-right">Yadda Saxla</button>
+                                </div>
+                                <a href="{% url 'teacher-list' %}" class="btn btn-danger pull-right">İmtina et</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+{% endblock %}
