@@ -28,7 +28,7 @@ SECRET_KEY = '9^cgmou+2=4u_ool%w4w9b-0wxz+=pom-j*i_&sz6q40+#3)eu'
 DEBUG = True if not PROD else False
 
 
-ALLOWED_HOSTS = ['pandaschool.az'] if PROD else ['*']
+ALLOWED_HOSTS = ['207.154.194.200'] if PROD else ['*']
 
 # COLORS #6d63be , rgba(82, 181, 181, 0.72), rgba(155, 142, 141, 0.93)
 # Default Django user model Override
