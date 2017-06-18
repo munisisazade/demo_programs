@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 PROD = False
-if '/panda/' in BASE_DIR:
+if '/demo/' in BASE_DIR:
     PROD = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '9^cgmou+2=4u_ool%w4w9b-0wxz+=pom-j*i_&sz6q40+#3)eu'
